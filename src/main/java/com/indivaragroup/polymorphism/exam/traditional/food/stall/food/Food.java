@@ -1,17 +1,5 @@
 package com.indivaragroup.polymorphism.exam.traditional.food.stall.food;
 
-//public class Food {
-//    String name;
-//
-//    public Food(String name) {
-//        this.name = name;
-//    }
-//
-//    public void showMenu() {
-//        System.out.println("Food menu");
-//    }
-//}
-
 import com.indivaragroup.interfacing.traditional.food.stall.FoodMenu;
 
 public abstract class Food implements FoodMenu {
@@ -28,3 +16,16 @@ public abstract class Food implements FoodMenu {
         this.price = price;
     }
 }
+
+
+//public class Food {
+//    String name;
+//
+//    public Food(String name) {
+//        this.name = name;
+//    }
+//
+//    public void showMenu() {
+//        System.out.println("Food menu");
+//    }
+//}

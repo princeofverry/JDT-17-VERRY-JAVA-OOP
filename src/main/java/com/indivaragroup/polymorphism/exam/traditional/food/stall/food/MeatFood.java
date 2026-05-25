@@ -1,4 +1,24 @@
 package com.indivaragroup.polymorphism.exam.traditional.food.stall.food;
+
+public class MeatFood extends Food {
+
+    public MeatFood(String name, String type, String cookType, int price) {
+        super(name, type, cookType, price);
+    }
+
+    @Override
+    public void showMenu() {
+        System.out.println(
+                "[Meat Food] "
+                        + "[" + type + "] "
+                        + name
+                        + " - "
+                        + cookType
+                        + " | Price : Rp" + price
+        );
+    }
+}
+
 //
 //public class MeatFood extends Food {
 //
@@ -21,22 +41,3 @@ package com.indivaragroup.polymorphism.exam.traditional.food.stall.food;
 //                + " | Price : Rp" + price);
 //    }
 //}
-
-public class MeatFood extends Food {
-
-    public MeatFood(String name, String type, String cookType, int price) {
-        super(name, type, cookType, price);
-    }
-
-    @Override
-    public void showMenu() {
-        System.out.println(
-                "[Meat Food] "
-                        + "[" + type + "] "
-                        + name
-                        + " - "
-                        + cookType
-                        + " | Price : Rp" + price
-        );
-    }
-}

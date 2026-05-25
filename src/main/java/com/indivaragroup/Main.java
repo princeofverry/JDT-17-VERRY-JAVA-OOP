@@ -45,10 +45,6 @@ public class Main {
          */
 
 
-
-
-
-
         System.out.println("PT JDT 17 MAJU SEJAHTERA MANDIRI");
         System.out.println("================================");
 
@@ -89,7 +85,6 @@ public class Main {
         // looping umur 20 - 55
         for (int age = 20; age <= 55; age++) {
             Employee employee;
-
             // looping nama biar muter terus
             String name = names[nameIndex];
 
@@ -160,76 +155,45 @@ public class Main {
         stall.showFoodMenu(foods);
         stall.showDrinkMenu(drinks);
 
+        System.out.println("\n");
+        System.out.println("Ini adalah  VALIDASI JDT 17 \n");
+
         // SCANNER
         Scanner input = new Scanner(System.in);
 
         try {
-
             // INPUT NAME
             System.out.print("INPUT NAME : ");
             String name = input.nextLine();
 
             // VALIDASI NAME
-            if (name.trim().isEmpty()) {
-                throw new EmployeeValidationException(
-                        "NAME CANNOT BE EMPTY"
-                );
-            }
-
-            if (name.length() < 5) {
-                throw new EmployeeValidationException(
-                        "MINIMAL NAME MUST BE 5 CHARACTERS"
-                );
-            }
+            EmployeeValidation.validateName(name);
 
             // INPUT AGE
             System.out.print("INPUT AGE : ");
             int age = input.nextInt();
 
             // VALIDASI AGE
-            if (age < 20) {
-                throw new EmployeeValidationException(
-                        "AGE CANNOT BELOW 20 YEARS OLD"
-                );
-            }
-
-            if (age > 35) {
-                throw new EmployeeValidationException(
-                        "AGE CANNOT MORE THAN 35 YEARS OLD"
-                );
-            }
+            EmployeeValidation.validateAge(age);
 
             Employee employee;
 
             if (age <= 25) {
-
-                employee = new JuniorEmployee(
-                        name,
-                        age
-                );
-
+                employee = new JuniorEmployee(name, age);
             } else {
-
-                employee = new SeniorEmployee(
-                        name,
-                        age
-                );
+                employee = new SeniorEmployee(name, age);
             }
 
             employee.showInfoEmployee();
 
         } catch (EmployeeValidationException e) {
-
             System.out.println(
                     "VALIDATION ERROR : "
                             + e.getMessage()
             );
 
         } catch (Exception e) {
-
-            System.out.println(
-                    "INVALID INPUT"
-            );
+            System.out.println("INVALID INPUT");
         }
     }
 }
