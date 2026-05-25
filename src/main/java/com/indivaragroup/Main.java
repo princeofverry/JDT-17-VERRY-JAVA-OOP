@@ -1,8 +1,20 @@
 package com.indivaragroup;
 
+import com.indivaragroup.exception.validation.emloyee.EmployeeValidation;
+import com.indivaragroup.exception.validation.emloyee.EmployeeValidationException;
+import com.indivaragroup.inheritance.exam.company.Employee;
 import com.indivaragroup.inheritance.exam.company.JuniorEmployee;
 import com.indivaragroup.inheritance.exam.company.ManagementEmployee;
 import com.indivaragroup.inheritance.exam.company.SeniorEmployee;
+import com.indivaragroup.polymorphism.exam.traditional.food.stall.*;
+import com.indivaragroup.polymorphism.exam.traditional.food.stall.drink.ColdDrink;
+import com.indivaragroup.polymorphism.exam.traditional.food.stall.drink.Drink;
+import com.indivaragroup.polymorphism.exam.traditional.food.stall.drink.HotDrink;
+import com.indivaragroup.polymorphism.exam.traditional.food.stall.food.Food;
+import com.indivaragroup.polymorphism.exam.traditional.food.stall.food.FriedFood;
+import com.indivaragroup.polymorphism.exam.traditional.food.stall.food.MeatFood;
+
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
@@ -20,32 +32,204 @@ public class Main {
         // NP : Nama attribute, tipe data harus benar:
         // 1. Kalo duit (big decimal) kalo diprint bentuk gajinya (10,000,000)
         // 2. ama orang dibuat uppercase ini bisa make (object) .toUpperCase()
+        /*
+            5. BUATKAN SAYA VALIDASI UNTUK PENDAFTARAN KARYAWAN DI SUATU ORGANISASI
+                * VALIDASI NAMA APABILA KOSONG / MINIMAL CHAR ADALAH 5 CHAR
+                * VALIDASI UMUR TIDAK BOLEH DIBAWAH DARI UMUR 20 TAHUN
+                * VALIDASI UMUR TIDAK BOLEH LEBIH DARI UMUR 35 TAHUN
+                * VALIDASI UMUR APABILA ROLE YANG DILAMAR (JAVA DEVELOPER) TIDAK BOLEH DIBAWAH 20 TAHUN
+                * VALIDASI ROLE YG DILAMAR TIDAK BOLEH KOSONG
+
+                NB: GUNAKAN EXCETION CLASS DAN SCANNER INPUT UNTUK INISIASI VARIABLE NYA
+                BUAT CLASS REFLECTIONNYA BUAT VALIDASI
+         */
+
+
+
+
 
 
         System.out.println("PT JDT 17 MAJU SEJAHTERA MANDIRI");
         System.out.println("================================");
 
-        JuniorEmployee emp1 =
-                new JuniorEmployee("Verry", 23);
+//        JuniorEmployee emp1 =
+//                new JuniorEmployee("Verry", 23);
+//
+//        SeniorEmployee emp2 =
+//                new SeniorEmployee("Budi", 27);
+//
+//        SeniorEmployee emp3 =
+//                new SeniorEmployee("Joko", 58);
+//
+//        ManagementEmployee hrd =
+//                new ManagementEmployee("Andi", 45);
+//
+//        emp1.showInfoEmployee();
+//        emp2.showInfoEmployee();
+//        emp3.showInfoEmployee();
+//        hrd.checkRetirement(emp1);
+//        hrd.checkRetirement(emp2);
+//        hrd.checkRetirement(emp3);
 
-        SeniorEmployee emp2 =
-                new SeniorEmployee("Budi", 27);
+        String[] names = {
+                "Verry",
+                "Budi",
+                "Joko",
+                "Andi",
+                "Rizky",
+                "Dani"
+        };
 
-        SeniorEmployee emp3 =
-                new SeniorEmployee("Joko", 58);
-
+        // HRD
         ManagementEmployee hrd =
-                new ManagementEmployee("Andi", 45);
+                new ManagementEmployee("Michael", 40);
 
-        emp1.showInfoEmployee();
-        emp2.showInfoEmployee();
-        emp3.showInfoEmployee();
+        int nameIndex = 0;
 
-        hrd.checkRetirement(emp1);
+        // looping umur 20 - 55
+        for (int age = 20; age <= 55; age++) {
+            Employee employee;
 
-        hrd.checkRetirement(emp2);
+            // looping nama biar muter terus
+            String name = names[nameIndex];
 
-        hrd.checkRetirement(emp3);
+            nameIndex++;
 
+            if (nameIndex >= names.length) {
+                nameIndex = 0;
+            }
+
+            if (age >= 20 && age <= 25) {
+                employee =
+                        new JuniorEmployee(name, age);
+            } else {
+                employee =
+                        new SeniorEmployee(name, age);
+            }
+
+            // tampilkan employee
+            employee.showInfoEmployee();
+            // HRD check retirement
+            hrd.checkRetirement(employee);
+            System.out.println();
+        }
+
+        // employee retirement
+        Employee oldEmployee =
+                new SeniorEmployee("Retirement Employee", 56);
+
+        oldEmployee.showInfoEmployee();
+
+        hrd.checkRetirement(oldEmployee);
+
+        // warteg kite
+
+
+        // FOOD
+        Food[] foods = {
+                new MeatFood("Catfish", "Fish", "Fried", 12000),
+
+                new MeatFood("Chicken Soup", "Chicken", "Boiled", 18000),
+                new MeatFood("Fried Chicken", "Chicken", "Fried", 15000), // Tambahan baru
+
+                new MeatFood("Beef Rendang", "Beef", "Fried", 25000),
+                new MeatFood("Beef Soup", "Beef", "Boiled", 22000), // Tambahan baru
+
+                // --- KATEGORI: GORENGAN ---
+                new FriedFood("Corn Bakwan", "Bakwan", "Fried", 5000),
+
+                new FriedFood("Stuffed Tofu", "Tofu", "Fried", 4000)
+        };
+
+        // DRINK
+        Drink[] drinks = {
+                // --- KATEGORI: DINGIN ---
+                new ColdDrink("Iced Tea", "Cold / Sweet", 5000),
+                new ColdDrink("Orange Juice", "Cold / Sweet", 8000),
+                new ColdDrink("Iced Americano", "Cold / Less Sweet", 12000),
+
+                // --- KATEGORI: PANAS ---
+                new HotDrink("Black Coffee", "Hot / Less Sweet", 7000),
+                new HotDrink("Hot Sweet Tea", "Hot / Sweet", 5000),
+                new HotDrink("Wedang Jahe", "Hot / Less Sweet", 9000)
+        };
+
+        TegalFoodStall stall = new TegalFoodStall();
+
+        // SHOW MENU
+        stall.showFoodMenu(foods);
+        stall.showDrinkMenu(drinks);
+
+        // SCANNER
+        Scanner input = new Scanner(System.in);
+
+        try {
+
+            // INPUT NAME
+            System.out.print("INPUT NAME : ");
+            String name = input.nextLine();
+
+            // VALIDASI NAME
+            if (name.trim().isEmpty()) {
+                throw new EmployeeValidationException(
+                        "NAME CANNOT BE EMPTY"
+                );
+            }
+
+            if (name.length() < 5) {
+                throw new EmployeeValidationException(
+                        "MINIMAL NAME MUST BE 5 CHARACTERS"
+                );
+            }
+
+            // INPUT AGE
+            System.out.print("INPUT AGE : ");
+            int age = input.nextInt();
+
+            // VALIDASI AGE
+            if (age < 20) {
+                throw new EmployeeValidationException(
+                        "AGE CANNOT BELOW 20 YEARS OLD"
+                );
+            }
+
+            if (age > 35) {
+                throw new EmployeeValidationException(
+                        "AGE CANNOT MORE THAN 35 YEARS OLD"
+                );
+            }
+
+            Employee employee;
+
+            if (age <= 25) {
+
+                employee = new JuniorEmployee(
+                        name,
+                        age
+                );
+
+            } else {
+
+                employee = new SeniorEmployee(
+                        name,
+                        age
+                );
+            }
+
+            employee.showInfoEmployee();
+
+        } catch (EmployeeValidationException e) {
+
+            System.out.println(
+                    "VALIDATION ERROR : "
+                            + e.getMessage()
+            );
+
+        } catch (Exception e) {
+
+            System.out.println(
+                    "INVALID INPUT"
+            );
+        }
     }
 }
