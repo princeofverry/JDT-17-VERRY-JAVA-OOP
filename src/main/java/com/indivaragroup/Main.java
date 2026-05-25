@@ -1,7 +1,7 @@
 package com.indivaragroup;
 
-import com.indivaragroup.exception.validation.emloyee.EmployeeValidation;
-import com.indivaragroup.exception.validation.emloyee.EmployeeValidationException;
+import com.indivaragroup.exception.validation.employee.EmployeeValidation;
+import com.indivaragroup.exception.validation.employee.EmployeeValidationException;
 import com.indivaragroup.inheritance.exam.company.Employee;
 import com.indivaragroup.inheritance.exam.company.JuniorEmployee;
 import com.indivaragroup.inheritance.exam.company.ManagementEmployee;

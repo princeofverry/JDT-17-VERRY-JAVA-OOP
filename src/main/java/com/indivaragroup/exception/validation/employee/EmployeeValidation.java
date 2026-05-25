@@ -1,4 +1,4 @@
-package com.indivaragroup.exception.validation.emloyee;
+package com.indivaragroup.exception.validation.employee;
 
 import com.indivaragroup.inheritance.exam.company.Employee;
 
