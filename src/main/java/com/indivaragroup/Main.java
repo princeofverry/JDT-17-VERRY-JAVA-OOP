@@ -162,31 +162,35 @@ public class Main {
         Scanner input = new Scanner(System.in);
 
         try {
+
             // INPUT NAME
             System.out.print("INPUT NAME : ");
             String name = input.nextLine();
 
-            // VALIDASI NAME
-            EmployeeValidation.validateName(name);
+            // VALIDASI NAME DULU
+            Employee tempName =
+                    new JuniorEmployee(name, 20);
+
+            EmployeeValidation.validate(tempName);
 
             // INPUT AGE
             System.out.print("INPUT AGE : ");
             int age = input.nextInt();
 
             // VALIDASI AGE
-            EmployeeValidation.validateAge(age);
+            Employee tempAge =
+                    new JuniorEmployee(name, age);
+
+            EmployeeValidation.validate(tempAge);
 
             Employee employee;
-
-            employee = new Employee(name, age);
-
-            // di employee udh ada checker role sebenarnya jadi chill saja
-//            if (age <= 25) {
-//                employee = new JuniorEmployee(name, age);
-//            } else {
-//                employee = new SeniorEmployee(name, age);
-//            }
-
+            if (age <= 25) {
+                employee =
+                        new JuniorEmployee(name, age);
+            } else {
+                employee =
+                        new SeniorEmployee(name, age);
+            }
             employee.showInfoEmployee();
 
         } catch (EmployeeValidationException e) {
@@ -194,9 +198,10 @@ public class Main {
                     "VALIDATION ERROR : "
                             + e.getMessage()
             );
-
         } catch (Exception e) {
-            System.out.println("INVALID INPUT");
+            System.out.println(
+                    "INVALID INPUT"
+            );
         }
     }
 }

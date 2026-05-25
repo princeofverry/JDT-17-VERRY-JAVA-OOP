@@ -6,35 +6,53 @@ import java.lang.reflect.Field;
 
 public class EmployeeValidation {
 
-    public static void validateName(String name)
-            throws EmployeeValidationException {
+    public static void validate(Employee employee)
+            throws IllegalAccessException,
+            EmployeeValidationException {
 
-        if (name == null || name.trim().isEmpty()) {
-            throw new EmployeeValidationException(
-                    "NAME CANNOT BE EMPTY"
-            );
-        }
+        Field[] fields =
+                employee.getClass()
+                        .getSuperclass()
+                        .getDeclaredFields();
 
-        if (name.length() < 5) {
-            throw new EmployeeValidationException(
-                    "MINIMAL NAME MUST BE 5 CHARACTERS"
-            );
-        }
-    }
+        for (Field field : fields) {
 
-    public static void validateAge(int age)
-            throws EmployeeValidationException {
+            field.setAccessible(true);
+            String fieldName = field.getName();
+            Object value =
+                    field.get(employee);
 
-        if (age < 20) {
-            throw new EmployeeValidationException(
-                    "AGE CANNOT BELOW 20 YEARS OLD"
-            );
-        }
+            // VALIDATE NAME
+            if (fieldName.equals("name")) {
+                String name = (String) value;
+                if (name == null ||
+                        name.trim().isEmpty()) {
+                    throw new EmployeeValidationException(
+                            "NAME CANNOT BE EMPTY"
+                    );
+                }
+                if (name.length() < 5) {
+                    throw new EmployeeValidationException(
+                            "MINIMAL NAME MUST BE 5 CHARACTERS"
+                    );
+                }
+            }
 
-        if (age > 35) {
-            throw new EmployeeValidationException(
-                    "AGE CANNOT MORE THAN 35 YEARS OLD"
-            );
+            // VALIDATE AGE
+            if (fieldName.equals("age")) {
+                int age = (int) value;
+                if (age < 20) {
+                    throw new EmployeeValidationException(
+                            "AGE CANNOT BELOW 20 YEARS OLD"
+                    );
+                }
+
+                if (age > 35) {
+                    throw new EmployeeValidationException(
+                            "AGE CANNOT MORE THAN 35 YEARS OLD"
+                    );
+                }
+            }
         }
     }
 }
