@@ -178,11 +178,14 @@ public class Main {
 
             Employee employee;
 
-            if (age <= 25) {
-                employee = new JuniorEmployee(name, age);
-            } else {
-                employee = new SeniorEmployee(name, age);
-            }
+            employee = new Employee(name, age);
+
+            // di employee udh ada checker role sebenarnya jadi chill saja
+//            if (age <= 25) {
+//                employee = new JuniorEmployee(name, age);
+//            } else {
+//                employee = new SeniorEmployee(name, age);
+//            }
 
             employee.showInfoEmployee();
 
