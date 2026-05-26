@@ -3,19 +3,17 @@ package com.indivaragroup.challenge.scanner.service;
 import com.indivaragroup.challenge.scanner.dto.ReceiptDTO;
 
 import java.math.BigDecimal;
-import java.util.List;
 import java.util.Properties;
 import java.util.UUID;
 
 public class ReceiptGenerator {
 
-    public String generate(
-            List<ReceiptDTO> receipts,
+    public static String generateReceipt(
+            ReceiptDTO[] receipts,
             Properties properties
     ) {
 
-        StringBuffer builder =
-                new StringBuffer();
+        StringBuilder builder = new StringBuilder();
 
         builder.append("\n");
         builder.append("===== RECEIPT =====\n");
@@ -50,6 +48,9 @@ public class ReceiptGenerator {
                 BigDecimal.ZERO;
 
         for (ReceiptDTO receipt : receipts) {
+            if (receipt == null) {
+                continue;
+            }
 
             builder.append(
                             receipt.getNameItem()
