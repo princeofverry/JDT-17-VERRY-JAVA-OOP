@@ -90,31 +90,28 @@ public class Course<T> {
     public T getNilai() {
         return nilai;
     }
-
-    public String getStatus() {
-        int n = (Integer) nilai;
-
-        if (n >= 85) {
-            return "Excellent";
-        } else if (n >= 70) {
-            return "Good";
-        } else if (n >= 50) {
-            return "Remedial";
-        } else {
-            return "Failed";
-        }
-    }
-
     public void tampilkanData() {
+        // state nilai
+        int n  = (Integer) nilai;
+
         System.out.println("NAMA PESERTA    : " + namaPeserta);
         System.out.println("NILAI           : " + nilai);
-        System.out.println("STATUS          : " + getStatus());
+
+        // checking STATUS
+        if (n >= 85) {
+            System.out.println("STATUS          : Excellent");
+        } else if (n >= 70) {
+            System.out.println("STATUS          : Good");
+        } else if (n >= 50) {
+            System.out.println("STATUS          : Remedial");
+        } else {
+            System.out.println("STATUS          : Failed");
+        }
         System.out.println();
     }
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-
         ArrayList<Course<Integer>> daftarPeserta = new ArrayList<>();
 
         System.out.print("Masukkan jumlah peserta : ");
@@ -177,6 +174,7 @@ public class Course<T> {
 
         System.out.println("\n HASIL \n");
 
+        // showing each personel
         for(Course<Integer> peserta : daftarPeserta) {
             peserta.tampilkanData();
         }
@@ -185,7 +183,6 @@ public class Course<T> {
 
         System.out.println("NILAI RATA-RATA     : " + rataRata);
         System.out.println("JUMLAH LULUS        : " + jumlahLulus);
-
         System.out.println("\nPeserta Nilai Tertinggi");
         System.out.println("Nama  : " + nilaiTertinggi.getNamaPeserta());
         System.out.println("Nilai : " + nilaiTertinggi.getNilai());
